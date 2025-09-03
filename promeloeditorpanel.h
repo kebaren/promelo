@@ -1,0 +1,20 @@
+#ifndef PROMELOEDITORPANEL_H
+#define PROMELOEDITORPANEL_H
+
+#include <QObject>
+#include <QMdiArea>
+#include "promeloeditor.h"
+
+class PromeloEditorPanel : public QMdiArea
+{
+    Q_OBJECT
+public:
+    PromeloEditorPanel(QWidget *parent = nullptr);
+    bool newEmptyEditor();
+private:
+    void config();
+private:
+    PromeloEditor *editor;
+};
+
+#endif // PROMELOEDITORPANEL_H
