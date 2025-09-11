@@ -10,7 +10,7 @@ PromeloWindow::PromeloWindow(QWidget *parent)
     eidtPanel = new PromeloEditorPanel(this);
     //manger tab hide
     ui->ManagerPanel->tabBar()->hide();
-    ui->EditSplitter->insertWidget(0,eidtPanel);
+    ui->containerLayout->addWidget(eidtPanel);
 
 }
 
@@ -24,7 +24,7 @@ PromeloWindow::~PromeloWindow()
 void PromeloWindow::on_btnFileManager_clicked()
 {
     ui->ManagerPanel->setCurrentIndex(0);
-    if(ui->Manager2Editor->sizes().first() > 0){
+    if(ui->splManger2Container->sizes().first() > 0){
 
     }else{
         ui->ManagerPanel->setVisible(true);
@@ -37,7 +37,7 @@ void PromeloWindow::on_btnFileManager_clicked()
 void PromeloWindow::on_btnSearchManager_clicked()
 {
     ui->ManagerPanel->setCurrentIndex(2);
-    if(ui->Manager2Editor->sizes().first() > 0){
+    if(ui->splManger2Container->sizes().first() > 0){
 
     }else{
         ui->ManagerPanel->setVisible(true);

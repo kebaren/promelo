@@ -47,13 +47,13 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>40</width>
+        <width>32</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>40</width>
+        <width>32</width>
         <height>16777215</height>
        </size>
       </property>
@@ -83,7 +83,7 @@
         <number>0</number>
        </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QVBoxLayout" name="vlayoutAcitvityBbr">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -366,13 +366,19 @@
      </widget>
     </item>
     <item>
-     <widget class="QSplitter" name="Manager2Editor">
+     <widget class="QSplitter" name="splManger2Container">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="handleWidth">
+       <number>1</number>
       </property>
       <widget class="QTabWidget" name="ManagerPanel">
        <property name="enabled">
         <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0px;</string>
        </property>
        <property name="tabPosition">
         <enum>QTabWidget::North</enum>
@@ -481,11 +487,54 @@
         </attribute>
        </widget>
       </widget>
-      <widget class="QSplitter" name="EditSplitter">
+      <widget class="QSplitter" name="splContainerRight">
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Horizontal</enum>
        </property>
-       <widget class="QMdiArea" name="TerminalPanel"/>
+       <property name="handleWidth">
+        <number>1</number>
+       </property>
+       <widget class="QSplitter" name="splEdit2Terminal">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="handleWidth">
+         <number>1</number>
+        </property>
+        <widget class="QWidget" name="editContainer" native="true">
+         <property name="styleSheet">
+          <string notr="true">border:0px;</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="containerLayout"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QMdiArea" name="TerminalPanel">
+         <property name="styleSheet">
+          <string notr="true">border:0px;</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="rightPanel" native="true">
+        <property name="styleSheet">
+         <string notr="true">border:0px;
+height:0px;</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>

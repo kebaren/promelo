@@ -3,20 +3,14 @@
 #include <QTabBar>
 
 PromeloEditorPanel::PromeloEditorPanel(QWidget *parent) {
-
-    for(int i=0; i< 4; i++)
-    {
-         newEmptyEditor();
-    }
-
-
+    newEmptyEditor();
     config();
 }
 
 bool PromeloEditorPanel::newEmptyEditor()
 {
     editor = new PromeloEditor(this);
-    editor->setWindowTitle(tr("New File"));
+    editor->setWindowTitle(tr("New File if you want to use but i can tel you"));
     addSubWindow(editor);
     return true;
 }
@@ -31,8 +25,7 @@ void PromeloEditorPanel::config()
     //setDocumentMode(true);
 
     QTabBar *tab = findChild<QTabBar *>();
-    //tab->setExpanding(false);
-    tab->setStyleSheet("QTabBar::tab{min-width:80px;max-width:200px}");
+    tab->setExpanding(false);
+    tab->setStyleSheet("QMdiArea>QTabBar::tab{text-align:left;min-width:80px;max-width:200px}");
     tab->setUsesScrollButtons(true);
-
 }

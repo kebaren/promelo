@@ -1,9 +1,11 @@
 #include "promeloeditor.h"
 
 PromeloEditor::PromeloEditor(QWidget *parent) {
+
     layout = new QVBoxLayout();
     editor = new CoreEditor();
     layout->addWidget(editor);
+    layout->setMargin(0);
     setLayout(layout);
 }
 
