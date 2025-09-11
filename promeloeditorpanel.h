@@ -12,7 +12,7 @@ public:
     PromeloEditorPanel(QWidget *parent = nullptr);
     bool newEmptyEditor();
 private:
-    void config();
+    void initConfig();
 private:
     PromeloEditor *editor;
 };

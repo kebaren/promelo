@@ -4,19 +4,19 @@
 
 PromeloEditorPanel::PromeloEditorPanel(QWidget *parent) {
     newEmptyEditor();
-    config();
+    initConfig();
 }
 
 bool PromeloEditorPanel::newEmptyEditor()
 {
     editor = new PromeloEditor(this);
-    editor->setWindowTitle(tr("New File if you want to use but i can tel you"));
+    editor->setWindowTitle(tr("New File"));
     addSubWindow(editor);
     return true;
 }
 
 
-void PromeloEditorPanel::config()
+void PromeloEditorPanel::initConfig()
 {
     //tab show
     setViewMode(QMdiArea::TabbedView);

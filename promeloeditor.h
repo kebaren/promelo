@@ -10,21 +10,20 @@
 
 class CoreEditor;
 
-class PromeloEditor:public QWidget
+class PromeloEditor : public ScintillaEditBase
 {
     Q_OBJECT
 public:
     PromeloEditor(QWidget *parent=0);
+    ~PromeloEditor();
+    //hide or show line number
+    void showLineNumber(bool shown);
 private:
-    CoreEditor *editor;
-    QVBoxLayout *layout;
-};
+    void initConfig();
+private:
 
-class CoreEditor : public ScintillaEditBase{
 
-    Q_OBJECT
-public:
-    CoreEditor(QWidget *parent = 0);
+    void RGB(int, int, int);
 };
 
 #endif // PROMELOEDITOR_H
