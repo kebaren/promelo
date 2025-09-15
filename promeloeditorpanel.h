@@ -11,6 +11,7 @@ class PromeloEditorPanel : public QMdiArea
 public:
     PromeloEditorPanel(QWidget *parent = nullptr);
     bool newEmptyEditor();
+    void saveFile(const QString &filePath);
 private:
     void initConfig();
 private:

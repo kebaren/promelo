@@ -24,6 +24,8 @@ private slots:
 
     void on_btnSearchManager_clicked();
 
+    void on_actionSave_triggered();
+
 private:
     Ui::PromeloWindow *ui;
     PromeloEditorPanel *eidtPanel;

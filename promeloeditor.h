@@ -20,6 +20,15 @@ public:
     void showLineNumber(bool shown);
     //set font
     void setFontFamily(QFont *font);
+
+    //get line count
+    qint64 getLineCount();
+    //get current line
+    qint64 getCurrentLineIndex();
+    QString getTextFromPosition(qint64 startlen, qint64 endlen);
+    qint64 getTextLength();
+    //save file
+    bool saveFile(const QString &filePath);
 private:
     void initConfig();
     void updateLineNumberMargin();
@@ -32,7 +41,8 @@ private slots:
 
 private:
     QTimer *timer;
-    QThread *workerThread;
+
+    //last line margin width
     qint64 lastLineCount= 0;
 
 

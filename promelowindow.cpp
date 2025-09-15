@@ -1,6 +1,7 @@
 #include "promelowindow.h"
 #include "ui_promelowindow.h"
 #include <QTabBar>
+#include <QFileDialog>
 
 PromeloWindow::PromeloWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,6 +15,7 @@ PromeloWindow::PromeloWindow(QWidget *parent)
     ui->rightPanel->hide();
     ui->TerminalPanel->hide();
     ui->containerLayout->addWidget(eidtPanel);
+
 
 }
 
@@ -46,5 +48,13 @@ void PromeloWindow::on_btnSearchManager_clicked()
         ui->ManagerPanel->setVisible(true);
         ui->ManagerPanel->setFixedWidth(200);
     }
+}
+
+
+void PromeloWindow::on_actionSave_triggered()
+{
+    QString path = QFileDialog::getSaveFileName(this,tr("save file"),tr("untiled"),tr("C++ File(*.cpp *.h *.cxx *.hpp);C File(*.c *.h)"));
+    eidtPanel->saveFile(path);
+
 }
 

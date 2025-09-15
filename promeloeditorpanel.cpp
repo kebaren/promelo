@@ -1,6 +1,9 @@
 #include "promeloeditorpanel.h"
 
 #include <QTabBar>
+#include <QMdiSubWindow>
+#include <QFileDialog>
+#include <QDebug>
 
 PromeloEditorPanel::PromeloEditorPanel(QWidget *parent) {
     newEmptyEditor();
@@ -13,6 +16,11 @@ bool PromeloEditorPanel::newEmptyEditor()
     editor->setWindowTitle(tr("New File"));
     addSubWindow(editor);
     return true;
+}
+
+void PromeloEditorPanel::saveFile(const QString &filePath)
+{
+    editor->saveFile(filePath);
 }
 
 
