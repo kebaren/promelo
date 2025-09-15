@@ -4,11 +4,11 @@
 #include <QObject>
 #include <QWidget>
 #include <QVBoxLayout>
+#include <QTimer>
+#include <QThread>
 
 #include "Scintilla.h"
 #include "ScintillaEditBase.h"
-
-class CoreEditor;
 
 class PromeloEditor : public ScintillaEditBase
 {
@@ -18,12 +18,24 @@ public:
     ~PromeloEditor();
     //hide or show line number
     void showLineNumber(bool shown);
+    //set font
+    void setFontFamily(QFont *font);
 private:
     void initConfig();
+    void updateLineNumberMargin();
+
+
+private slots:
+    void anjustLineMargin(Scintilla::ModificationFlags type, Scintilla::Position position, Scintilla::Position length, Scintilla::Position linesAdded,const QByteArray &text, Scintilla::Position line, Scintilla::FoldLevel foldNow, Scintilla::FoldLevel foldPrev);
+
+private slots:
+
 private:
+    QTimer *timer;
+    QThread *workerThread;
+    qint64 lastLineCount= 0;
 
 
-    void RGB(int, int, int);
 };
 
 #endif // PROMELOEDITOR_H

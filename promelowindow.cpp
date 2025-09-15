@@ -10,6 +10,9 @@ PromeloWindow::PromeloWindow(QWidget *parent)
     eidtPanel = new PromeloEditorPanel(this);
     //manger tab hide
     ui->ManagerPanel->tabBar()->hide();
+    ui->ManagerPanel->hide();
+    ui->rightPanel->hide();
+    ui->TerminalPanel->hide();
     ui->containerLayout->addWidget(eidtPanel);
 
 }

@@ -9,7 +9,7 @@ PromeloEditorPanel::PromeloEditorPanel(QWidget *parent) {
 
 bool PromeloEditorPanel::newEmptyEditor()
 {
-    editor = new PromeloEditor(this);
+    editor = new PromeloEditor();
     editor->setWindowTitle(tr("New File"));
     addSubWindow(editor);
     return true;
