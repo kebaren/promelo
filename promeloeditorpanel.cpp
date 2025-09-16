@@ -20,7 +20,7 @@ bool PromeloEditorPanel::newEmptyEditor()
 
 void PromeloEditorPanel::saveFile(const QString &filePath)
 {
-    editor->saveFile(filePath);
+
 }
 
 
