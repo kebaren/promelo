@@ -7,56 +7,6 @@
 #include <QTimer>
 #include <QtConcurrent/QtConcurrent>
 
-class PromeloEditor;
-
-void PromeloEditor:: updateLineNumberMargin()
-{
-    //do not update
-    qint64 totalLines = send(SCI_GETLINECOUNT);
-    Scintilla::Position lineCount = std::log10(totalLines);
-    if (lineCount == lastLineCount) {
-        return;
-    }
-    //update line margin width
-    lastLineCount = lineCount;
-    int digits = 1;
-    if (lineCount > 0) {
-        digits = lineCount + 1;
-    }
-    char fontName[64];
-    this->send(SCI_STYLEGETFONT, STYLE_LINENUMBER, reinterpret_cast<sptr_t>(fontName));
-    int fontSize = static_cast<int>(send(SCI_STYLEGETSIZE, STYLE_LINENUMBER));
-    bool bold = send(SCI_STYLEGETBOLD, STYLE_LINENUMBER);
-    QFont font(QString::fromUtf8(fontName), fontSize);
-    font.setBold(bold);
-    QFontMetrics metrics(font);
-    QString maxDigitStr = QString::number(totalLines);
-    int textWidth = metrics.horizontalAdvance(maxDigitStr);
-    int width = textWidth + 4;
-
-    if (width < 20) {
-        width = 20;
-    }
-
-    send(SCI_SETMARGINWIDTHN, 0, width);
-
-}
-
-void PromeloEditor::anjustLineMargin(Scintilla::ModificationFlags type, Scintilla::Position position, Scintilla::Position length, Scintilla::Position linesAdded, const QByteArray &text, Scintilla::Position line, Scintilla::FoldLevel foldNow, Scintilla::FoldLevel foldPrev)
-{
-    Q_UNUSED(position);
-    Q_UNUSED(length);
-    Q_UNUSED(text);
-    Q_UNUSED(line);
-    Q_UNUSED(foldNow);
-    Q_UNUSED(foldPrev);
-
-    // if(type == Scintilla::ModificationFlags::InsertText || type == Scintilla::ModificationFlags::DeleteText){
-    //     timer->start();
-    // }
-    if(linesAdded != 0)    timer->start();
-
-}
 
 PromeloEditor::PromeloEditor(QWidget *parent) {
 
@@ -89,8 +39,11 @@ void PromeloEditor::initConfig()
     timer = new QTimer(this);
     timer->setSingleShot(true);
     timer->setInterval(100);
-    connect(this,&PromeloEditor::modified,this,&PromeloEditor::anjustLineMargin);
+    connect(this,&PromeloEditor::modified,this,&PromeloEditor::adjustLineMargin);
     connect(timer, &QTimer::timeout, this, &PromeloEditor::updateLineNumberMargin);
+
+    //ZOOM
+    connect(this,&PromeloEditor::updateUi,this,&PromeloEditor::updateUiMargin);
 
 }
 
@@ -175,5 +128,75 @@ bool PromeloEditor::saveFile(const QString &filePath)
     inFile<<str;
     file.close();
     return true;
+}
+
+
+void PromeloEditor:: updateLineNumberMargin()
+{
+    qDebug()<<"enter adjust....";
+    //do not update
+    qint64 totalLines = send(SCI_GETLINECOUNT);
+    Scintilla::Position lineCount = std::log10(totalLines);
+    if (lineCount == lastLineCount) {
+        return;
+    }
+    //update line margin width
+    lastLineCount = lineCount;
+    int digits = 1;
+    if (lineCount > 0) {
+        digits += lineCount;
+    }
+    char fontName[64];
+    this->send(SCI_STYLEGETFONT, STYLE_LINENUMBER, reinterpret_cast<sptr_t>(fontName));
+    int fontSize = static_cast<int>(send(SCI_STYLEGETSIZE, STYLE_LINENUMBER));
+    bool bold = send(SCI_STYLEGETBOLD, STYLE_LINENUMBER);
+    QFont font(QString::fromUtf8(fontName), fontSize);
+    font.setBold(bold);
+    QFontMetricsF metrics(font);
+    QString maxDigitStr = QString::number(totalLines);
+    int textWidth = 0;
+    for(int i=0; i<maxDigitStr.length();i++){
+        textWidth += metrics.horizontalAdvance(maxDigitStr[i]);
+    }
+    qDebug()<<"font width:"<<textWidth;
+    int width = textWidth + 4;
+
+    if (width < 20) {
+        width = 20;
+    }
+
+    send(SCI_SETMARGINWIDTHN, 0, width);
+
+}
+
+void PromeloEditor::resizeEvent(QResizeEvent *event)
+{
+    ScintillaEditBase::resizeEvent(event);
+    qDebug()<<"scintilla zoom....";
+    timer->start();
+}
+
+void PromeloEditor::adjustLineMargin(Scintilla::ModificationFlags type, Scintilla::Position position, Scintilla::Position length, Scintilla::Position linesAdded, const QByteArray &text, Scintilla::Position line, Scintilla::FoldLevel foldNow, Scintilla::FoldLevel foldPrev)
+{
+    Q_UNUSED(position);
+    Q_UNUSED(length);
+    Q_UNUSED(text);
+    Q_UNUSED(line);
+    Q_UNUSED(foldNow);
+    Q_UNUSED(foldPrev);
+
+    // if(type == Scintilla::ModificationFlags::InsertText || type == Scintilla::ModificationFlags::DeleteText){
+    //     timer->start();
+    // }
+    if(linesAdded != 0)    timer->start();
+
+}
+
+void PromeloEditor::updateUiMargin(Scintilla::Update updated)
+{
+    count++;
+    qDebug()<<"update ui: "<<count;
+    updateLineNumberMargin();
+    qDebug()<<"tiemr start...";
 }
 

@@ -16,9 +16,7 @@ set(CMAKE_AUTORCC ON)
 
 
 # 查找Qt5组件
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt5 REQUIRED COMPONENTS Core)
-find_package(Qt5 REQUIRED COMPONENTS Core)
+find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui)
 
 # 定义scintilla源文件
 file(GLOB SCINTILLA_SOURCES
@@ -36,7 +34,7 @@ file(GLOB LEXILLA_SOURCES
 
 # 添加包含目录
 include_directories(
-    "${CMAKE_CURRENT_SOURCE_DIR}/3dPart/scintilla/include"  # 修复了拼写错误 inlcude -> include
+    "${CMAKE_CURRENT_SOURCE_DIR}/3dPart/scintilla/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/3dPart/scintilla/src"
     "${CMAKE_CURRENT_SOURCE_DIR}/3dPart/scintilla/qt/ScintillaEditBase"
     "${CMAKE_CURRENT_SOURCE_DIR}/3dPart/scintilla/qt/ScintillaEdit"
@@ -72,19 +70,20 @@ add_executable(promelo
     promelowindow.ui
     promeloeditorpanel.cpp
     promeloeditorpanel.h
+
+
+
     res.qrc
     ${SCINTILLA_SOURCES}
     ${LEXILLA_SOURCES}
 )
 
 # 链接Qt库
-target_link_libraries(promelo PRIVATE Qt5::Widgets)
+target_link_libraries(promelo PRIVATE Qt5::Widgets Qt5::Core Qt5::Gui)
 
 # 链接Windows输入法库
 if(WIN32)
     target_link_libraries(promelo PRIVATE Imm32)
-target_link_libraries(promelo PRIVATE Qt5::Core)
-target_link_libraries(promelo PRIVATE Qt5::Core)
 endif()
 
 # 设置目标属性

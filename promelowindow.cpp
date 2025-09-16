@@ -8,6 +8,9 @@ PromeloWindow::PromeloWindow(QWidget *parent)
     , ui(new Ui::PromeloWindow)
 {
     ui->setupUi(this);
+    //seetings window flags
+
+
     eidtPanel = new PromeloEditorPanel(this);
     //manger tab hide
     ui->ManagerPanel->tabBar()->hide();
@@ -28,26 +31,26 @@ PromeloWindow::~PromeloWindow()
 
 void PromeloWindow::on_btnFileManager_clicked()
 {
-    ui->ManagerPanel->setCurrentIndex(0);
-    if(ui->splManger2Container->sizes().first() > 0){
+    // ui->ManagerPanel_2->setCurrentIndex(0);
+    // if(ui->splManger2Container->sizes().first() > 0){
 
-    }else{
-        ui->ManagerPanel->setVisible(true);
-        ui->ManagerPanel->setFixedWidth(200);
-    }
+    // }else{
+    //     ui->ManagerPanel->setVisible(true);
+    //     ui->ManagerPanel->setFixedWidth(200);
+    // }
 
 }
 
 
 void PromeloWindow::on_btnSearchManager_clicked()
 {
-    ui->ManagerPanel->setCurrentIndex(2);
-    if(ui->splManger2Container->sizes().first() > 0){
+    // ui->ManagerPanel->setCurrentIndex(2);
+    // if(ui->splManger2Container->sizes().first() > 0){
 
-    }else{
-        ui->ManagerPanel->setVisible(true);
-        ui->ManagerPanel->setFixedWidth(200);
-    }
+    // }else{
+    //     ui->ManagerPanel->setVisible(true);
+    //     ui->ManagerPanel->setFixedWidth(200);
+    // }
 }
 
 

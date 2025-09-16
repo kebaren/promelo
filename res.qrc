@@ -6,5 +6,9 @@
         <file>images/icon/git.PNG</file>
         <file>images/icon/search.PNG</file>
         <file>images/icon/test.PNG</file>
+        <file>images/icon/close.png</file>
+        <file>images/icon/max.png</file>
+        <file>images/icon/min.png</file>
+        <file>images/icon/toggle.png</file>
     </qresource>
 </RCC>

@@ -32,11 +32,12 @@ public:
 private:
     void initConfig();
     void updateLineNumberMargin();
+    void resizeEvent(QResizeEvent *event)override;
 
 
 private slots:
-    void anjustLineMargin(Scintilla::ModificationFlags type, Scintilla::Position position, Scintilla::Position length, Scintilla::Position linesAdded,const QByteArray &text, Scintilla::Position line, Scintilla::FoldLevel foldNow, Scintilla::FoldLevel foldPrev);
-
+    void adjustLineMargin(Scintilla::ModificationFlags type, Scintilla::Position position, Scintilla::Position length, Scintilla::Position linesAdded,const QByteArray &text, Scintilla::Position line, Scintilla::FoldLevel foldNow, Scintilla::FoldLevel foldPrev);
+    void updateUiMargin(Scintilla::Update updated);
 private slots:
 
 private:
@@ -44,6 +45,7 @@ private:
 
     //last line margin width
     qint64 lastLineCount= 0;
+    int count=0;
 
 
 };
