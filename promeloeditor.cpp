@@ -25,15 +25,12 @@ PromeloEditor::~PromeloEditor()
 void PromeloEditor::initConfig()
 {
     //utf8 setting
-    send(SCI_SETCODEPAGE, SC_CP_UTF8);
+    setCodePage(SC_CP_UTF8);
 
     //setting line number initialial
     setMarginWidthN(0,20);
-    //line number area style
-
+    //line number auto adjust
     connect(this, &PromeloEditor::notify, this, &PromeloEditor::updateLineNumberMargin);
-
-    //ZOOM
 
 }
 
