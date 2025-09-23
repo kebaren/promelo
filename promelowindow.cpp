@@ -61,3 +61,9 @@ void PromeloWindow::on_actionSave_triggered()
 
 }
 
+
+void PromeloWindow::on_actionNew_File_triggered()
+{
+    eidtPanel->newEmptyEditor();
+}
+

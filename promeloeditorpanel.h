@@ -14,6 +14,12 @@ public:
     void saveFile(const QString &filePath);
 private:
     void initConfig();
+
+
+protected:
+    //rewrite mouse double click
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+
 private:
     PromeloEditor *editor;
 };

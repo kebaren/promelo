@@ -4,17 +4,20 @@
 #include <QMdiSubWindow>
 #include <QFileDialog>
 #include <QDebug>
+#include <QMouseEvent>
 
 PromeloEditorPanel::PromeloEditorPanel(QWidget *parent) {
     newEmptyEditor();
     initConfig();
+
 }
 
 bool PromeloEditorPanel::newEmptyEditor()
 {
     editor = new PromeloEditor();
-    editor->setWindowTitle(tr("New File"));
+    editor->setWindowTitle(tr("Untitled"));
     addSubWindow(editor);
+    editor->show();
     return true;
 }
 
@@ -30,10 +33,30 @@ void PromeloEditorPanel::initConfig()
     setViewMode(QMdiArea::TabbedView);
     setTabsClosable(true);
     setTabsMovable(true);
-    //setDocumentMode(true);
+    setDocumentMode(true);
 
     QTabBar *tab = findChild<QTabBar *>();
     tab->setExpanding(false);
-    tab->setStyleSheet("QMdiArea>QTabBar::tab{text-align:left;min-width:80px;max-width:200px}");
+   // tab->setStyleSheet("QMdiArea>QTabBar::tab{text-align:left;min-width:80px;max-width:200px}");
     tab->setUsesScrollButtons(true);
+
+}
+
+void PromeloEditorPanel::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    qDebug()<<"clicke mdi...."<<event->pos();
+    QTabBar *tabBar = findChild<QTabBar *>();
+
+    if(tabBar && tabBar->isVisible())
+    {
+        //trans point
+        QPoint tabBarPos = tabBar->mapFromParent(event->pos());
+        if(tabBar->tabAt(tabBarPos)==-1){
+            qDebug()<<"clicke...."<<event->pos();
+            newEmptyEditor();
+            event->accept();
+        }
+    }
+
+    QMdiArea::mouseDoubleClickEvent(event);
 }
