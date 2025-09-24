@@ -14,15 +14,22 @@ public:
     PromeloEditor(QWidget *parent=0);
     ~PromeloEditor();
 
+    //file saved status
+    bool isFileSaed();
+    bool saveFile();
+    bool isFileFirstSaved();
+
 private:
     void initConfig();
     void updateLineNumberMargin();
+
 
 private slots:
 
 
 private:
-
+    bool m_isFileSaved = false;
+    bool m_isFileFirstSvaed = false;
 
 
 

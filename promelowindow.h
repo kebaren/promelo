@@ -28,6 +28,8 @@ private slots:
 
     void on_actionNew_File_triggered();
 
+    void on_actionExit_triggered();
+
 private:
     Ui::PromeloWindow *ui;
     PromeloEditorPanel *eidtPanel;

@@ -14,7 +14,10 @@ public:
     void saveFile(const QString &filePath);
 private:
     void initConfig();
+    void initSlots();
 
+private slots:
+    void closeTab();
 
 protected:
     //rewrite mouse double click
@@ -22,6 +25,7 @@ protected:
 
 private:
     PromeloEditor *editor;
+    QTabBar *tabBar;
 };
 
 #endif // PROMELOEDITORPANEL_H

@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <algorithm>
+#include <QFileDialog>
 #include <QtConcurrent/QtConcurrent>
 
 
@@ -40,6 +41,27 @@ void PromeloEditor:: updateLineNumberMargin()
     int lineCounts = lineCount();
     int linePixelWidth = (std::max<int>(std::log10(lineCounts),3)+1) *textWidth(STYLE_LINENUMBER,"8")+8;
     setMarginWidthN(0,linePixelWidth);
+}
+
+bool PromeloEditor::isFileSaed()
+{
+    return m_isFileSaved;
+}
+
+bool PromeloEditor::saveFile()
+{
+    QString dir = QCoreApplication::applicationDirPath();
+    QString FilePath = QFileDialog::getSaveFileName(this,tr("Save File"),dir,tr("c++ File(*.cpp *.h *.cxx *.hpp)"));
+
+    if(FilePath.isEmpty()){
+        return false;
+    }
+    return true;
+}
+
+bool PromeloEditor::isFileFirstSaved()
+{
+    return m_isFileFirstSvaed;
 }
 
 
